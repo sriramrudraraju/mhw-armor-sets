@@ -23,8 +23,8 @@ class Armor extends React.Component<AllProps, ArmorState> {
   }
   render() {
     // setting armorSets to received data or defaulting it to empty array
-    const armorSets = armorSetsStore.armorSetsResponse.data
-      ? armorSetsStore.armorSetsResponse.data
+    const armorSets = armorSetsStore.armorSetsResponse
+      ? armorSetsStore.armorSetsResponse
       : [];
     return (
       <div>

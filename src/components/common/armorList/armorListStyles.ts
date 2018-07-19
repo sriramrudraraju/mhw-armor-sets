@@ -11,7 +11,9 @@ const Styles: StyleRules<
   },
   iconSize: {
     height: theme.palette.spacing.unit * 5,
-    width: theme.palette.spacing.unit * 4
+    width: theme.palette.spacing.unit * 4,
+    marginLeft: theme.palette.spacing.unit * 0.25,
+    marginRight: theme.palette.spacing.unit * 0.25
   },
   typography: {
     color: theme.palette.primary.main

@@ -2,14 +2,16 @@ import * as React from "react";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 import { observer, inject } from "mobx-react";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 
+import ArmorWepIcons from "../armor-wep-icons/armor-wep-icons";
+
 import armorListStyles from "./armorListStyles";
 
 import ApplicationStoreType from "../../../stores/applicationStore";
+import { ArmorSet } from "../../../constants/types";
 
 type WithStylesProps = WithStyles<
   "tableBodyText" | "iconSize" | "typography" | "center"
@@ -18,14 +20,13 @@ interface MobxProps {
   applicationStore: ApplicationStoreType;
 }
 interface ArmorListProps {}
-interface ArmorListState {}
 type AllProps = ArmorListProps &
-  ArmorListWithMobxProps &
+  ArmorListWithoutMobxProps &
   MobxProps &
   WithStylesProps;
 
 @observer
-class ArmorList extends React.Component<AllProps, ArmorListState> {
+class ArmorList extends React.Component<AllProps, never> {
   // TODO: armor sets data from api
   // TODO: filter the whole set
   // TODO: then display the sets
@@ -46,6 +47,10 @@ class ArmorList extends React.Component<AllProps, ArmorListState> {
     event.stopPropagation();
   }
 
+  getArmorIcon(name: any) {
+    return <ArmorWepIcons icon={name} />;
+  }
+
   render() {
     const { classes, armorSets } = this.props;
     return (
@@ -64,11 +69,10 @@ class ArmorList extends React.Component<AllProps, ArmorListState> {
                       aria-label="Delete"
                       className={classes.iconSize}
                       onClick={this.clickArmorPart.bind(this, {
-                        ...piece,
-                        bonus: { ...value.bonus }
+                        ...piece
                       })}
                     >
-                      <DeleteIcon />
+                      {this.getArmorIcon(piece.type)}
                     </IconButton>
                   ))}
                 </div>
@@ -82,11 +86,12 @@ class ArmorList extends React.Component<AllProps, ArmorListState> {
 }
 
 // props that are passed to ArmorListWithMobx
-interface ArmorListWithMobxProps {
-  armorSets: Array<{ name: string; pieces: Array<any>; bonus?: object }>;
+interface ArmorListWithoutMobxProps {
+  armorSets: Array<ArmorSet>;
 }
 
-const ArmorListWithMobx: React.SFC<ArmorListWithMobxProps> = inject(
+const ArmorListWithMobx: React.SFC<ArmorListWithoutMobxProps> = inject(
   "applicationStore"
 )(observer((props: AllProps) => <ArmorList {...props} />));
+
 export default withStyles(armorListStyles)(ArmorListWithMobx);
