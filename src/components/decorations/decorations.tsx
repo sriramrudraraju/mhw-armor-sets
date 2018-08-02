@@ -26,8 +26,13 @@ class Decorations extends React.Component<AllProps, State> {
   }
 
   componentWillMount() {
+    const decorations = decorationsStore.decorationsResponse
+      ? decorationsStore.decorationsResponse
+      : [];
     // fetch decorations
-    decorationsStore.fetchDecorations();
+    if (!decorations.length) {
+      decorationsStore.fetchDecorations();
+    }
   }
 
   clickDecoration(decorationInfo: any) {
@@ -43,8 +48,8 @@ class Decorations extends React.Component<AllProps, State> {
 
   render() {
     // setting data only when response has data or defaulting it to empty array
-    const decorations = decorationsStore.decorationsResponse.data
-      ? decorationsStore.decorationsResponse.data
+    const decorations = decorationsStore.decorationsResponse
+      ? decorationsStore.decorationsResponse
       : [];
     return (
       <div>

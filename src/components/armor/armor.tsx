@@ -19,7 +19,13 @@ const armorSetsStore: ArmorSetsStoreType = new ArmorSetsStore();
 @observer
 class Armor extends React.Component<AllProps, ArmorState> {
   componentWillMount() {
-    armorSetsStore.fetchArmorSets();
+    const armorSets = armorSetsStore.armorSetsResponse
+      ? armorSetsStore.armorSetsResponse
+      : [];
+    // call api only if no data in store  
+    if(!armorSets.length) {
+      armorSetsStore.fetchArmorSets();
+    }
   }
   render() {
     // setting armorSets to received data or defaulting it to empty array

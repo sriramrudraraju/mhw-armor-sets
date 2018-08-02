@@ -13,7 +13,6 @@ const DecorationsList: React.SFC<DecorationsListProps> = (
   props: DecorationsListProps
 ) => {
   const { decorations } = props;
-
   return (
     <List>
       {decorations.map(value => (
