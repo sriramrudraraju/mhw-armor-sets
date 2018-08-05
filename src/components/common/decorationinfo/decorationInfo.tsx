@@ -40,7 +40,6 @@ class DecorationInfo extends React.Component<AllProps, DecorationInfoState> {
 
   render() {
     const { classes, decorationInfo } = this.props;
-    console.log(decorationInfo);
     return (
       <div className={classes.decorationInfo}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>

@@ -15,7 +15,6 @@ type AllProps = ArmorEquipProps & WithStylesProps;
 
 const ArmorEquip: React.SFC<AllProps> = (props: AllProps) => {
   const { classes, selectedPiece } = props;
-  console.log("selected piece", selectedPiece);
   return (
     <div className={classes.armorEquip}>
       <Button

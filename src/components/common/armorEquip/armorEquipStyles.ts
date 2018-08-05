@@ -5,7 +5,7 @@ import theme from "../../../assets/themes/theme";
 const styles: StyleRules<"armorEquip" | "armorButton" | "decorationButton"> = {
   armorEquip: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: theme.palette.spacing.unit * 0.5
   },
