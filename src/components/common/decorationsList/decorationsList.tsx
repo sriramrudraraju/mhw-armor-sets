@@ -4,9 +4,11 @@ import ListItem from "@material-ui/core/ListItem";
 
 import Decoration from "../decoration/decoration";
 
+import { DecorationType } from "../../../types/decorationTypes";
+
 interface DecorationsListProps {
-  decorations: Array<any>;
-  clickDecoration: (event: any) => any;
+  decorations: Array<DecorationType>;
+  clickDecoration: (value: DecorationType) => void;
 }
 
 const DecorationsList: React.SFC<DecorationsListProps> = (
@@ -22,7 +24,7 @@ const DecorationsList: React.SFC<DecorationsListProps> = (
           divider={true}
           onClick={props.clickDecoration.bind(props, value)}
         >
-          <Decoration name={value.name} imageUrl={value.imageUrl} />
+          <Decoration name={value.name} />
         </ListItem>
       ))}
     </List>

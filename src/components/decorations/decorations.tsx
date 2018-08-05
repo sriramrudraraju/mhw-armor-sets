@@ -1,13 +1,14 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
 
-import DecorationList from "../common/decorationsList/decorationsList";
+import DecorationsList from "../common/decorationsList/decorationsList";
 
 import DecorationsStore, {
   DecorationsStoreType
 } from "../../stores/decorationsStore";
 
 import ApplicationStoreType from "../../stores/applicationStore";
+import { DecorationType } from "../../types/decorationTypes";
 
 interface MobxProps {
   applicationStore: ApplicationStoreType;
@@ -35,7 +36,7 @@ class Decorations extends React.Component<AllProps, State> {
     }
   }
 
-  clickDecoration(decorationInfo: any) {
+  clickDecoration(decorationInfo: DecorationType) {
     // open right side drawer
     this.props.applicationStore.toggleRightSideDrawer(true);
 
@@ -58,7 +59,7 @@ class Decorations extends React.Component<AllProps, State> {
           ? "error fetching decorations"
           : null}
         {decorations.length > 0 ? (
-          <DecorationList
+          <DecorationsList
             decorations={decorations}
             clickDecoration={this.clickDecoration}
           />

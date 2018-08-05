@@ -7,7 +7,7 @@ import decorationStyles from "./decorationStyles";
 type WithStylesProps = WithStyles<"decoration" | "typography">;
 interface DecorationProps {
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 type AllProps = DecorationProps & WithStylesProps;
 
