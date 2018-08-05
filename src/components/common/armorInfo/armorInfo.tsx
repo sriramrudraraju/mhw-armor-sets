@@ -12,11 +12,13 @@ import ArmorSkill from "../armorSkill/armorSkill";
 
 import armorInfoStyles from "./armorInfoStyles";
 
-import ApplicationStoreType from "../../../stores/applicationStore";
+import { ApplicationStoreType } from "../../../stores/applicationStore";
+import { SelectedArmorSetStoreType } from "../../../stores/selectedArmorSetsStore";
 
 type WithStylesProps = WithStyles<"armorInfo" | "button">;
 interface MobxProps {
   applicationStore: ApplicationStoreType;
+  selectedArmorSetStore: SelectedArmorSetStoreType;
 }
 interface ArmorInfoProps {}
 interface ArmorInfoState {}
@@ -34,7 +36,8 @@ class ArmorInfo extends React.Component<AllProps, ArmorInfoState> {
   }
 
   clickEquip() {
-    // TODO store this armor info
+    const { partInfo } = this.props;
+    this.props.selectedArmorSetStore.changePieceInfoAt(partInfo);
     // go to home
     this.props.history.push("/");
     // close right side drawer
@@ -84,7 +87,7 @@ class ArmorInfo extends React.Component<AllProps, ArmorInfoState> {
           <div>
             <Typography variant="subheading">Set Bonus</Typography>
             {partInfo.bonus &&
-              partInfo.bonus.ranks && (
+              partInfo.bonus.ranks.length > 0 && (
                 <ArmorSkill
                   key={partInfo.bonus.ranks[0].id}
                   name={partInfo.bonus ? partInfo.bonus.name : ""}
@@ -119,7 +122,7 @@ interface ArmorInfoWithMobxProps {
 
 const ArmorInfoWithMobx: React.SFC<
   ArmorInfoWithMobxProps & RouteComponentProps<any, any>
-> = inject("applicationStore")(
+> = inject("applicationStore", "selectedArmorSetStore")(
   observer((props: AllProps) => <ArmorInfo {...props} />)
 );
 

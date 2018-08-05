@@ -13,8 +13,9 @@ import armorListStyles from "./armorListStyles";
 import ApplicationStoreType from "../../../stores/applicationStore";
 import {
   ArmorSetType,
-  ArmorPieceType,
-  ArmorType
+  ArmorTypeType,
+  ArmorType,
+  ArmorInfoType
 } from "../../../types/armorTypes";
 
 type WithStylesProps = WithStyles<
@@ -40,9 +41,9 @@ class ArmorList extends React.Component<AllProps, never> {
 
   // on clicking individual parts only
   // merging partInfo and bonus in the onClick initialization, as wee need those bonus stats
-  clickArmorPart(partInfo: ArmorType, event: any) {
+  clickArmorPart(armorInfo: ArmorInfoType, event: any) {
     // set part info
-    this.props.applicationStore.setPartInfo(partInfo);
+    this.props.applicationStore.setPartInfo(armorInfo);
     // set the rightSideNav mode to armorInfo
     this.props.applicationStore.setRightSideNavMode("armorInfo");
     // open right side drawer
@@ -51,7 +52,7 @@ class ArmorList extends React.Component<AllProps, never> {
     event.stopPropagation();
   }
 
-  getArmorIcon(name: ArmorPieceType) {
+  getArmorIcon(name: ArmorTypeType) {
     return <ArmorWepIcons icon={name} />;
   }
 
@@ -70,10 +71,10 @@ class ArmorList extends React.Component<AllProps, never> {
                   {value.pieces.map((piece: ArmorType) => (
                     <IconButton
                       key={piece.name}
-                      aria-label="Delete"
                       className={classes.iconSize}
                       onClick={this.clickArmorPart.bind(this, {
-                        ...piece
+                        ...piece,
+                        bonus: value.bonus
                       })}
                     >
                       {this.getArmorIcon(piece.type)}

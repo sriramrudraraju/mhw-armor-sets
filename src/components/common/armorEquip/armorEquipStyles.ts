@@ -10,7 +10,7 @@ const styles: StyleRules<"armorEquip" | "armorButton" | "decorationButton"> = {
     padding: theme.palette.spacing.unit * 0.5
   },
   armorButton: {
-    width: "45vw",
+    width: "100%",
     height: theme.palette.spacing.unit * 6,
     margin: theme.palette.spacing.unit * 0.25,
     minHeight: theme.palette.spacing.unit * 4,

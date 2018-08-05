@@ -8,15 +8,22 @@ import App from "./components/app/app";
 import ApplicationStore, {
   ApplicationStoreType
 } from "./stores/applicationStore";
+import SelectedArmorSetStore, {
+  SelectedArmorSetStoreType
+} from "./stores/selectedArmorSetsStore";
 
 import theme from "./assets/themes/theme";
 import "./index.css";
 
 const applicationStore: ApplicationStoreType = new ApplicationStore();
+const selectedArmorSetStore: SelectedArmorSetStoreType = new SelectedArmorSetStore();
 
 ReactDOM.render(
   <MuiThemeProvider theme={createMuiTheme(theme)}>
-    <Provider applicationStore={applicationStore}>
+    <Provider
+      applicationStore={applicationStore}
+      selectedArmorSetStore={selectedArmorSetStore}
+    >
       <App />
     </Provider>
   </MuiThemeProvider>,

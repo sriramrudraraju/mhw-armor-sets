@@ -18,7 +18,7 @@ export type SlotType = {
   rank: number;
 };
 
-export type ArmorPieceType = "head" | "chest" | "gloves" | "waist" | "legs";
+export type ArmorTypeType = "head" | "chest" | "gloves" | "waist" | "legs";
 
 export type SetInfoType = {
   id: number;
@@ -57,7 +57,7 @@ export type ArmorType = {
   id: number;
   slug: string;
   name: string;
-  type: ArmorPieceType;
+  type: ArmorTypeType;
   rank: ArmorRankType;
   rarity: number;
   defense: DefenceType;
@@ -116,3 +116,5 @@ export type ArmorSetType = {
   pieces: Array<ArmorType>;
   bonus: ArmorSetBonusType;
 };
+
+export type ArmorInfoType = ArmorType & { bonus: ArmorSetBonusType };

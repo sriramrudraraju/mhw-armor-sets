@@ -7,11 +7,13 @@ import ArmorEquip from "../common/armorEquip/armorequip";
 
 import homeStyles from "./homeStyles";
 
-import ApplicationStoreType from "../../stores/applicationStore";
+import { ApplicationStoreType } from "../../stores/applicationStore";
+import { SelectedArmorSetStoreType } from "../../stores/selectedArmorSetsStore";
 
 type WithstylesProps = WithStyles<"home">;
 interface MobxProps {
   applicationStore: ApplicationStoreType;
+  selectedArmorSetStore: SelectedArmorSetStoreType;
 }
 interface HomeProps {}
 interface HomeState {}
@@ -30,30 +32,33 @@ class Home extends React.Component<AllProps, HomeState> {
 
   clickedInfo(info: any) {
     // gets the info about which armor/deco/empty slot is clicked
-    console.log(info);
     // go to armors list if armor is selected
     // go to decorations if decoration is selected
-    // if (info === "armor") {
-    //   this.props.history.push("/armors");
-    // } else if (info === "decoration") {
-    //   this.props.history.push("/decorations");
-    // }
+    if (
+      info.type === "head" ||
+      info.type === "chest" ||
+      info.type === "waist" ||
+      info.type === "gloves" ||
+      info.type === "legs"
+    ) {
+      this.props.history.push("/armors");
+    } else if (info === "decoration") {
+      this.props.history.push("/decorations");
+    }
   }
 
   render() {
-    const armorSet = [
-      { type: "weapon" },
-      { type: "head" },
-      { type: "chest" },
-      { type: "gloves" },
-      { type: "waist" },
-      { type: "legs" },
-      { type: "charm" }
-    ];
+    const armorSet = this.props.selectedArmorSetStore.selectedArmorSet;
     return (
       <div>
-        {armorSet.map(piece => {
-          return <ArmorEquip key={piece.type} />;
+        {armorSet.map((piece: any) => {
+          return (
+            <ArmorEquip
+              key={piece.type}
+              selectedPiece={piece}
+              clickedInfo={this.clickedInfo}
+            />
+          );
         })}
       </div>
     );
@@ -64,7 +69,7 @@ interface HomeWithMobxProps {}
 
 const HomeWithMobx: React.SFC<
   HomeWithMobxProps & RouteComponentProps<any, any>
-> = inject("applicationStore")(
+> = inject("applicationStore", "selectedArmorSetStore")(
   observer((props: AllProps) => <Home {...props} />)
 );
 
