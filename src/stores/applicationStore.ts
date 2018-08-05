@@ -1,33 +1,22 @@
 import { observable, action } from "mobx";
 
 type rightSideNaveModes = "armorInfo" | "builtSetSummary" | "decorationInfo";
-type PartInfoType = {
-  name: string;
-  rarity: number;
-  skills: Array<any>;
-  slots: Array<any>;
-  bonus: { id: number; name: string; ranks: Array<any> };
-};
-export type DecorationInfoType = {
-  name: string;
-  skills: Array<{ description: string; skillName: string }>;
-};
 
 export type ApplicationStoreType = {
   openLeftSideNav: boolean;
   openRightSideDrawer: boolean;
   itemId: number;
   rightSideNavMode: rightSideNaveModes;
-  partInfo: PartInfoType;
-  decorationInfo: DecorationInfoType;
+  partInfo: any;
+  decorationInfo: any;
   toggleLeftSideNav: (value: boolean) => void;
   toggleRightSideDrawer: (value: boolean) => void;
   setItemId: (value: number) => void;
   setRightSideNavMode: (
     value: "armorInfo" | "builtSetSummary" | "decorationInfo"
   ) => void;
-  setPartInfo: (obj: PartInfoType) => void;
-  setDecorationInfo: (obj: DecorationInfoType) => void;
+  setPartInfo: (obj: any) => void;
+  setDecorationInfo: (obj: any) => void;
 };
 
 class ApplicationStore implements ApplicationStoreType {
@@ -70,12 +59,12 @@ class ApplicationStore implements ApplicationStoreType {
   };
 
   @action
-  setPartInfo = (obj: PartInfoType): void => {
+  setPartInfo = (obj: any): void => {
     this.partInfo = obj;
   };
 
   @action
-  setDecorationInfo = (obj: DecorationInfoType): void => {
+  setDecorationInfo = (obj: any): void => {
     this.decorationInfo = obj;
   };
 }

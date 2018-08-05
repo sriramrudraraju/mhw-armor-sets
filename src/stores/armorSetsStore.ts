@@ -2,6 +2,8 @@ import { observable, flow } from "mobx";
 
 import armorSets from "../api/armorSets";
 
+import { ArmorSetType } from "../types/armorTypes";
+
 export type ArmorSetsStoreType = {
   state: string;
   armorSetsResponse: any;
@@ -10,7 +12,7 @@ export type ArmorSetsStoreType = {
 
 class ArmorSetsStore implements ArmorSetsStoreType {
   @observable state: string = "idle";
-  @observable armorSetsResponse: any = [];
+  @observable armorSetsResponse: Array<ArmorSetType> = [];
 
   fetchArmorSets = flow(function*(this: ArmorSetsStoreType) {
     this.state = "pending";

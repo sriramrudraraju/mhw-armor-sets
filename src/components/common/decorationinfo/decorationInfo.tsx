@@ -9,10 +9,7 @@ import StatsDataTable from "../statsDataTable/statsDataTable";
 
 import decorationInfoStyles from "./decorationInfostyles";
 
-import {
-  ApplicationStoreType,
-  DecorationInfoType
-} from "../../../stores/applicationStore";
+import { ApplicationStoreType } from "../../../stores/applicationStore";
 
 type WithStylesProps = WithStyles<"decorationInfo" | "button">;
 interface MobxProps {
@@ -80,7 +77,7 @@ class DecorationInfo extends React.Component<AllProps, DecorationInfoState> {
 }
 
 interface DecorationInfoWithMobxProps {
-  decorationInfo: DecorationInfoType;
+  decorationInfo: any;
 }
 
 const DecorationInfoWithMobx: React.SFC<

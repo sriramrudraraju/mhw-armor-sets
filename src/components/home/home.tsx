@@ -41,15 +41,20 @@ class Home extends React.Component<AllProps, HomeState> {
   }
 
   render() {
+    const armorSet = [
+      { type: "weapon" },
+      { type: "head" },
+      { type: "chest" },
+      { type: "gloves" },
+      { type: "waist" },
+      { type: "legs" },
+      { type: "charm" }
+    ];
     return (
       <div>
-        <ArmorEquip />
-        <ArmorEquip />
-        <ArmorEquip />
-        <ArmorEquip />
-        <ArmorEquip />
-        <ArmorEquip />
-        <ArmorEquip />
+        {armorSet.map(piece => {
+          return <ArmorEquip key={piece.type} />;
+        })}
       </div>
     );
   }

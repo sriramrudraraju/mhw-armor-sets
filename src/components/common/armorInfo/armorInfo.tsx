@@ -43,7 +43,6 @@ class ArmorInfo extends React.Component<AllProps, ArmorInfoState> {
 
   render() {
     const { classes, partInfo } = this.props;
-    console.log(partInfo);
     return (
       <div className={classes.armorInfo}>
         {/* Name and Rarity */}

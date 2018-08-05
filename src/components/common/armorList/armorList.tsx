@@ -11,7 +11,11 @@ import ArmorWepIcons from "../armor-wep-icons/armor-wep-icons";
 import armorListStyles from "./armorListStyles";
 
 import ApplicationStoreType from "../../../stores/applicationStore";
-import { ArmorSet } from "../../../constants/types";
+import {
+  ArmorSetType,
+  ArmorPieceType,
+  ArmorType
+} from "../../../types/armorTypes";
 
 type WithStylesProps = WithStyles<
   "tableBodyText" | "iconSize" | "typography" | "center"
@@ -36,7 +40,7 @@ class ArmorList extends React.Component<AllProps, never> {
 
   // on clicking individual parts only
   // merging partInfo and bonus in the onClick initialization, as wee need those bonus stats
-  clickArmorPart(partInfo: any, event: any) {
+  clickArmorPart(partInfo: ArmorType, event: any) {
     // set part info
     this.props.applicationStore.setPartInfo(partInfo);
     // set the rightSideNav mode to armorInfo
@@ -47,7 +51,7 @@ class ArmorList extends React.Component<AllProps, never> {
     event.stopPropagation();
   }
 
-  getArmorIcon(name: any) {
+  getArmorIcon(name: ArmorPieceType) {
     return <ArmorWepIcons icon={name} />;
   }
 
@@ -56,14 +60,14 @@ class ArmorList extends React.Component<AllProps, never> {
     return (
       <div>
         <List>
-          {armorSets.map(value => (
+          {armorSets.map((value: ArmorSetType) => (
             <ListItem key={value.name} button={true} divider={true}>
               <div className={classes.center}>
                 <Typography variant="body2" className={classes.typography}>
                   {value.name}
                 </Typography>
                 <div>
-                  {value.pieces.map(piece => (
+                  {value.pieces.map((piece: ArmorType) => (
                     <IconButton
                       key={piece.name}
                       aria-label="Delete"
@@ -87,7 +91,7 @@ class ArmorList extends React.Component<AllProps, never> {
 
 // props that are passed to ArmorListWithMobx
 interface ArmorListWithoutMobxProps {
-  armorSets: Array<ArmorSet>;
+  armorSets: Array<ArmorSetType>;
 }
 
 const ArmorListWithMobx: React.SFC<ArmorListWithoutMobxProps> = inject(
